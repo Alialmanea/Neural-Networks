@@ -187,4 +187,13 @@ In the case of the perceptron, the output has only two possible values: +1 or -1
 
 If the perceptron guesses the correct answer, then the guess equals the desired output and the error is 0. If the correct answer is -1 and we’ve guessed +1, then the error is -2. If the correct answer is +1 and we’ve guessed -1, then the error is +2.
 
+| Plugin | README |
+| ------ | ------ |
+| Dropbox | [-1][PlDb] | | [][PlDb] |
+| GitHub | [-1][PlGh] | | [][PlGh] |
+| Google Drive | [+1][PlGd] | | [][PlDb] |
+| OneDrive | [+1][PlOd] | | [][PlDb] |
+| Medium | [][PlMe] | | [][PlDb] |
+| Google Analytics | [][PlGa] | | [][PlDb] |
+
 
