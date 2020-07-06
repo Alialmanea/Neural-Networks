@@ -4,6 +4,7 @@ The human brain can be described as a biological neural network—an interconnec
 
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_01.png" title=""/>
 
+
 The good news is that developing engaging animated systems with code does not require scientific rigor or accuracy, as we’ve learned throughout this book. We can simply be inspired by the idea of brain function.
 
 
@@ -56,7 +57,9 @@ So instead, we’ll begin our last hurrah in the nature of code with the simples
 
 Invented in 1957 by Frank Rosenblatt at the Cornell Aeronautical Laboratory, a perceptron is the simplest neural network possible: a computational model of a single neuron. A perceptron consists of one or more inputs, a processor, and a single output.
 
+
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_03.png" title=""/>
+
 
 A perceptron follows the “feed-forward” model, meaning inputs are sent into the neuron, are processed, and result in an output. In the diagram above, this means the network (one neuron) reads from left to right: inputs come in, output goes out.
 
@@ -73,7 +76,9 @@ Let’s say a perceptron has 2 inputs (the x- and y-coordinates of a point). Usi
 
 The perceptron itself can be diagrammed as follows:
 
+
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_05.png" title=""/>
+
 
 We can see how there are two inputs (x and y), a weight for each input (weightx and weighty), as well as a processing neuron that generates the output.
 
@@ -103,6 +108,7 @@ class Perceptron{
   float lr = 0.001;
   
 ```
+
 The constructor could receive an argument indicating the number of inputs (in this case three: x, y, and a bias) and size the array accordingly.
 
 
@@ -114,7 +120,9 @@ Perceptron(int n){
     }
   }
 ```
+
 A perceptron needs to be able to receive inputs and generate an output. We can package these requirements into a function called guess(). In this example, we’ll have the perceptron receive its inputs as an array (which should be the same length as the array of weights) and return the output as an integer.
+
 
 ```Java
 int guess(float[] inputs){
@@ -125,4 +133,21 @@ int guess(float[] inputs){
     int output = sign(sum);
     return output;
   }
+```
+Presumably, we could now create a Perceptron object and ask it to make a guess for any given point.
+
+<img src="https://natureofcode.com/book/imgs/chapter10/ch10_07.png" title=""/>
+
+
+```Java
+Perceptron brian;
+Point[] points = new Point[100];
+int trainingindex = 0;
+void setup(){
+  size(600, 600);
+  // initialize The point class
+  for (int i = 0;i < points.length;i++){
+    points[i] = new Point();
+  }
+}
 ```
