@@ -2,6 +2,7 @@
 
 The human brain can be described as a biological neural network—an interconnected web of neurons transmitting elaborate patterns of electrical signals. Dendrites receive input signals and, based on those inputs, fire an output signal via an axon. Or something like that. How the human brain actually works is an elaborate and complex mystery, one that we certainly are not going to attempt to tackle in rigorous detail in this chapter.
 
+
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_01.png" title=""/>
 
 
@@ -20,7 +21,6 @@ Here we have yet another example of a complex system, much like the ones we exam
 One of the key elements of a neural network is its ability to learn. A neural network is not just a complex system, but a complex adaptive system, meaning it can change its internal structure based on the information flowing through it. Typically, this is achieved through the adjusting of weights. In the diagram above, each line represents a connection between two neurons and indicates the pathway for the flow of information. Each connection has a weight, a number that controls the signal between the two neurons. If the network generates a “good” output (which we’ll define later), there is no need to adjust the weights. However, if the network generates a “poor” output—an error, so to speak—then the system adapts, altering the weights in order to improve subsequent results.
 
 There are several strategies for learning, and we’ll examine two of them in this chapter.
-
 
 Supervised Learning —Essentially, a strategy that involves a teacher that is smarter than the network itself. For example, let’s take the facial recognition example. The teacher shows the network a bunch of faces, and the teacher already knows the name associated with each face. The network makes its guesses, then the teacher provides the network with the answers. The network can then compare its answers to the known “correct” ones and make adjustments according to its errors. Our first neural network in the next section will follow this model.
 
@@ -70,6 +70,7 @@ Now that we understand the computational process of a perceptron, we can look at
 
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_04.png" title=""/>
 
+
 Consider a line in two-dimensional space. Points in that space can be classified as living on either one side of the line or the other. While this is a somewhat silly example (since there is clearly no need for a neural network; we can determine on which side a point lies with some simple algebra), it shows how a perceptron can be trained to recognize points on one side versus another.
 
 Let’s say a perceptron has 2 inputs (the x- and y-coordinates of a point). Using a sign activation function, the output will either be -1 or 1—i.e., the input data is classified according to the sign of the output. In the above diagram, we can see how each point is either below the line (-1) or above (+1).
@@ -87,6 +88,7 @@ There is a pretty significant problem here, however. Let’s consider the point 
 To avoid this dilemma, our perceptron will require a third input, typically referred to as a bias input. A bias input always has the value of 1 and is also weighted. Here is our perceptron with the addition of the bias:
 
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_06.png" title=""/>
+
 
 Let’s go back to the point (0,0). Here are our inputs:
 
@@ -135,6 +137,7 @@ int guess(float[] inputs){
   }
 ```
 Presumably, we could now create a Perceptron object and ask it to make a guess for any given point.
+
 
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_07.png" title=""/>
 
