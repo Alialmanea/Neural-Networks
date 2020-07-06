@@ -59,3 +59,5 @@ Invented in 1957 by Frank Rosenblatt at the Cornell Aeronautical Laboratory, a p
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_03.png" title=""/>
 
 A perceptron follows the “feed-forward” model, meaning inputs are sent into the neuron, are processed, and result in an output. In the diagram above, this means the network (one neuron) reads from left to right: inputs come in, output goes out.
+
+##### Let’s follow each of these steps in more detail.
