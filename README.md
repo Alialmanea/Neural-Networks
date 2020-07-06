@@ -60,11 +60,69 @@ Invented in 1957 by Frank Rosenblatt at the Cornell Aeronautical Laboratory, a p
 
 A perceptron follows the “feed-forward” model, meaning inputs are sent into the neuron, are processed, and result in an output. In the diagram above, this means the network (one neuron) reads from left to right: inputs come in, output goes out.
 
-#### Let’s follow each of these steps in more detail.
+ Simple Pattern Recognition Using a Perceptron
 
----
-title: "Your title here"
-date: "Todays date"
-output:
-  html_document
----
+Now that we understand the computational process of a perceptron, we can look at an example of one in action. We stated that neural networks are often used for pattern recognition applications, such as facial recognition. Even simple perceptrons can demonstrate the basics of classification, as in the following example.
+
+
+<img src="https://natureofcode.com/book/imgs/chapter10/ch10_04.png" title=""/>
+
+Consider a line in two-dimensional space. Points in that space can be classified as living on either one side of the line or the other. While this is a somewhat silly example (since there is clearly no need for a neural network; we can determine on which side a point lies with some simple algebra), it shows how a perceptron can be trained to recognize points on one side versus another.
+
+Let’s say a perceptron has 2 inputs (the x- and y-coordinates of a point). Using a sign activation function, the output will either be -1 or 1—i.e., the input data is classified according to the sign of the output. In the above diagram, we can see how each point is either below the line (-1) or above (+1).
+
+The perceptron itself can be diagrammed as follows:
+
+<img src="https://natureofcode.com/book/imgs/chapter10/ch10_05.png" title=""/>
+
+We can see how there are two inputs (x and y), a weight for each input (weightx and weighty), as well as a processing neuron that generates the output.
+
+There is a pretty significant problem here, however. Let’s consider the point (0,0). What if we send this point into the perceptron as its input: x = 0 and y = 0? What will the sum of its weighted inputs be? No matter what the weights are, the sum will always be 0! But this can’t be right—after all, the point (0,0) could certainly be above or below various lines in our two-dimensional world.
+
+To avoid this dilemma, our perceptron will require a third input, typically referred to as a bias input. A bias input always has the value of 1 and is also weighted. Here is our perceptron with the addition of the bias:
+
+<img src="https://natureofcode.com/book/imgs/chapter10/ch10_06.png" title=""/>
+
+Let’s go back to the point (0,0). Here are our inputs:
+
+0 * weight for x = 0
+0 * weight for y = 0
+1 * weight for bias = weight for bias
+
+The output is the sum of the above three values, 0 plus 0 plus the bias’s weight. Therefore, the bias, on its own, answers the question as to where (0,0) is in relation to the line. If the bias’s weight is positive, (0,0) is above the line; negative, it is below. It “biases” the perceptron’s understanding of the line’s position relative to (0,0).
+
+
+
+#### Coding the Perceptron
+We’re now ready to assemble the code for a Perceptron class. The only data the perceptron needs to track are the input weights,
+and we could use an array of floats to store these.
+
+```Java
+class Perceptron{
+  float[] weights;
+  float lr = 0.001;
+  
+```
+The constructor could receive an argument indicating the number of inputs (in this case three: x, y, and a bias) and size the array accordingly.
+
+
+```Java
+Perceptron(int n){
+    weights= new float[n];
+    for(int i = 0;i<weights.length;i++){
+      weights[i] = random(-1, 1);
+    }
+  }
+```
+A perceptron needs to be able to receive inputs and generate an output. We can package these requirements into a function called guess(). In this example, we’ll have the perceptron receive its inputs as an array (which should be the same length as the array of weights) and return the output as an integer.
+
+```Java
+int guess(float[] inputs){
+    float sum = 0;
+    for (int i =0; i < weights.length; i++){
+      sum += inputs[i] * weights[i];
+    }
+    int output = sign(sum);
+    return output;
+  }
+```
