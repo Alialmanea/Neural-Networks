@@ -154,3 +154,37 @@ void setup(){
   }
 }
 ```
+
+Did the perceptron get it right? At this point, the perceptron has no better than a 50/50 chance of arriving at the right answer. Remember, when we created it, we gave each weight a random value. A neural network isn’t magic. It’s not going to be able to guess anything correctly unless we teach it how to!
+
+To train a neural network to answer correctly, we’re going to employ the method of supervised learning that we described in section 10.1.
+
+With this method, the network is provided with inputs for which there is a known answer. This way the network can find out if it has made a correct guess. If it’s incorrect, the network can learn from its mistake and adjust its weights. The process is as follows:
+
+1.Provide the perceptron with inputs for which there is a known answer.
+
+2.Ask the perceptron to guess an answer.
+
+3.Compute the error. (Did it get the answer right or wrong?)
+
+4.Adjust all the weights according to the error.
+
+5.Return to Step 1 and repeat!
+
+Steps 1 through 4 can be packaged into a function. Before we can write the entire function, however, we need to examine Steps 3 and 4 in more detail. How do we define the perceptron’s error? And how should we adjust the weights according to this error?
+
+The perceptron’s error can be defined as the difference between the desired answer and its guess.
+
+ERROR = DESIRED OUTPUT - GUESS OUTPUT
+
+The above formula may look familiar to you. In Chapter 6, we computed a steering force as the difference between our desired velocity and our current velocity.
+
+STEERING = DESIRED VELOCITY - CURRENT VELOCITY
+
+This was also an error calculation. The current velocity acts as a guess and the error (the steering force) tells us how to adjust the velocity in the right direction. In a moment, we’ll see how adjusting the vehicle’s velocity to follow a target is just like adjusting the weights of a neural network to arrive at the right answer.
+
+In the case of the perceptron, the output has only two possible values: +1 or -1. This means there are only three possible errors.
+
+If the perceptron guesses the correct answer, then the guess equals the desired output and the error is 0. If the correct answer is -1 and we’ve guessed +1, then the error is -2. If the correct answer is +1 and we’ve guessed -1, then the error is +2.
+
+
