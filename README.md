@@ -23,6 +23,7 @@ There are several strategies for learning, and we’ll examine two of them in th
 
 Supervised Learning —Essentially, a strategy that involves a teacher that is smarter than the network itself. For example, let’s take the facial recognition example. The teacher shows the network a bunch of faces, and the teacher already knows the name associated with each face. The network makes its guesses, then the teacher provides the network with the answers. The network can then compare its answers to the known “correct” ones and make adjustments according to its errors. Our first neural network in the next section will follow this model.
 
+<img src="https://natureofcode.com/book/imgs/chapter10/ch10_03.png" title=""/>
 
 Unsupervised Learning —Required when there isn’t an example data set with known answers. Imagine searching for a hidden pattern in a data set. An application of this is clustering, i.e. dividing a set of elements into groups according to some unknown pattern. We won’t be looking at any examples of unsupervised learning in this chapter, as this strategy is less relevant for our examples.
 
@@ -54,9 +55,6 @@ So instead, we’ll begin our last hurrah in the nature of code with the simples
 Invented in 1957 by Frank Rosenblatt at the Cornell Aeronautical Laboratory, a perceptron is the simplest neural network possible: a computational model of a single neuron. A perceptron consists of one or more inputs, a processor, and a single output.
 
 
-<img src="https://natureofcode.com/book/imgs/chapter10/ch10_03.png" title=""/>
 
 
-
-
-<img src="implement_of_Nural_networks.gif" title=""/>
+A perceptron follows the “feed-forward” model, meaning inputs are sent into the neuron, are processed, and result in an output. In the diagram above, this means the network (one neuron) reads from left to right: inputs come in, output goes out.
