@@ -161,15 +161,15 @@ To train a neural network to answer correctly, we’re going to employ the metho
 
 With this method, the network is provided with inputs for which there is a known answer. This way the network can find out if it has made a correct guess. If it’s incorrect, the network can learn from its mistake and adjust its weights. The process is as follows:
 
-1.Provide the perceptron with inputs for which there is a known answer.
+> 1. Provide the perceptron with inputs for which there is a known answer.
 
-2.Ask the perceptron to guess an answer.
+> 2. Ask the perceptron to guess an answer.
 
-3.Compute the error. (Did it get the answer right or wrong?)
+> 3. Compute the error. (Did it get the answer right or wrong?)
 
-4.Adjust all the weights according to the error.
+> 4. Adjust all the weights according to the error.
 
-5.Return to Step 1 and repeat!
+> 5. Return to Step 1 and repeat!
 
 Steps 1 through 4 can be packaged into a function. Before we can write the entire function, however, we need to examine Steps 3 and 4 in more detail. How do we define the perceptron’s error? And how should we adjust the weights according to this error?
 
@@ -179,7 +179,7 @@ The perceptron’s error can be defined as the difference between the desired an
 
 The above formula may look familiar to you. In Chapter 6, we computed a steering force as the difference between our desired velocity and our current velocity.
 
-STEERING = DESIRED VELOCITY - CURRENT VELOCITY
+### STEERING = DESIRED VELOCITY - CURRENT VELOCITY
 
 This was also an error calculation. The current velocity acts as a guess and the error (the steering force) tells us how to adjust the velocity in the right direction. In a moment, we’ll see how adjusting the vehicle’s velocity to follow a target is just like adjusting the weights of a neural network to arrive at the right answer.
 
@@ -211,7 +211,7 @@ To understand why this works, we can again return to steering. A steering force 
 
 With steering, however, we had an additional variable that controlled the vehicle’s ability to steer: the maximum force. With a high maximum force, the vehicle was able to accelerate and turn very quickly; with a lower force, the vehicle would take longer to adjust its velocity. The neural network will employ a similar strategy with a variable called the “learning constant.” We’ll add in the learning constant as follows:
 
-NEW WEIGHT = WEIGHT + ERROR * INPUT * LEARNING CONSTANT
+#### NEW WEIGHT = WEIGHT + ERROR * INPUT * LEARNING CONSTANT
 
 Notice that a high learning constant means the weight will change more drastically. This may help us arrive at a solution more quickly, but with such large changes in weight it’s possible we will overshoot the optimal weights. With a small learning constant, the weights will be adjusted slowly, requiring more training time but allowing the network to make very small adjustments that could improve the network’s overall accuracy.
 
