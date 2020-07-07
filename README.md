@@ -187,11 +187,11 @@ In the case of the perceptron, the output has only two possible values: +1 or -1
 
 If the perceptron guesses the correct answer, then the guess equals the desired output and the error is 0. If the correct answer is -1 and we’ve guessed +1, then the error is -2. If the correct answer is +1 and we’ve guessed -1, then the error is +2.
 
-| Desired    |  Guess   | Error |
-| :---:      |  :---:   | :---: |
-| -1         | -1       |   0   |
-| -1         | +1       |  -2   |
-| +1         | -1       |  +2   |
-| +1         | +1       |   0.  |
+                                                                     | Desired    |  Guess   | Error |
+                                                                     | :---:      |  :---:   | :---: |
+                                                                     | -1         | -1       |   0   |
+                                                                     | -1         | +1       |  -2   |
+                                                                     | +1         | -1       |  +2   |
+                                                                     | +1         | +1       |   0.  |
 
 
