@@ -175,7 +175,7 @@ Steps 1 through 4 can be packaged into a function. Before we can write the entir
 
 The perceptron’s error can be defined as the difference between the desired answer and its guess.
 
-ERROR = DESIRED OUTPUT - GUESS OUTPUT
+### ERROR = DESIRED OUTPUT - GUESS OUTPUT
 
 The above formula may look familiar to you. In Chapter 6, we computed a steering force as the difference between our desired velocity and our current velocity.
 
@@ -187,11 +187,196 @@ In the case of the perceptron, the output has only two possible values: +1 or -1
 
 If the perceptron guesses the correct answer, then the guess equals the desired output and the error is 0. If the correct answer is -1 and we’ve guessed +1, then the error is -2. If the correct answer is +1 and we’ve guessed -1, then the error is +2.
 
-                                                                     | Desired    |  Guess   | Error |
-                                                                     | :---:      |  :---:   | :---: |
-                                                                     | -1         | -1       |   0   |
-                                                                     | -1         | +1       |  -2   |
-                                                                     | +1         | -1       |  +2   |
-                                                                     | +1         | +1       |   0.  |
+| Desired    |  Guess   | Error |
+| :---:      |  :---:   | :---: |
+| -1         | -1       |   0   |
+| -1         | +1       |  -2   |
+| +1         | -1       |  +2   |
+| +1         | +1       |   0.  |
+
+The error is the determining factor in how the perceptron’s weights should be adjusted. For any given weight, what we are looking to calculate is the change in weight, often called Δweight (or “delta” weight, delta being the Greek letter Δ).
+
+### NEW WEIGHT = WEIGHT + ΔWEIGHT
+
+### Δweight is calculated as the error multiplied by the input.
+
+### ΔWEIGHT = ERROR * INPUT
+
+Therefore:
+
+### NEW WEIGHT = WEIGHT + ERROR * INPUT
+
+To understand why this works, we can again return to steering. A steering force is essentially an error in velocity. If we apply that force as our acceleration (Δvelocity), then we adjust our velocity to move in the correct direction. This is what we want to do with our neural network’s weights. We want to adjust them in the right direction, as defined by the error.
 
 
+With steering, however, we had an additional variable that controlled the vehicle’s ability to steer: the maximum force. With a high maximum force, the vehicle was able to accelerate and turn very quickly; with a lower force, the vehicle would take longer to adjust its velocity. The neural network will employ a similar strategy with a variable called the “learning constant.” We’ll add in the learning constant as follows:
+
+NEW WEIGHT = WEIGHT + ERROR * INPUT * LEARNING CONSTANT
+
+Notice that a high learning constant means the weight will change more drastically. This may help us arrive at a solution more quickly, but with such large changes in weight it’s possible we will overshoot the optimal weights. With a small learning constant, the weights will be adjusted slowly, requiring more training time but allowing the network to make very small adjustments that could improve the network’s overall accuracy.
+
+Assuming the addition of a variable c for the learning constant, we can now write a training function for the perceptron following the above steps.
+
+```Java
+float lr = 0.01;
+ 
+// Step 1: Provide the inputs and known answer. These are passed in as arguments to train().
+void train(float[] inputs, int desired) {
+ 
+// Step 2: Guess according to those inputs.
+  int guess = guess(inputs);
+ 
+// Step 3: Compute the error (difference between answer and guess).
+  float error = target - guess;
+ 
+ // Step 4: Adjust all the weights according to the error and learning constant.
+  for (int i = 0; i < weights.length; i++) {
+    weights[i] += lr * error * inputs[i];
+  }
+}
+```
+We can now see the Perceptron class as a whole.
+
+
+```Java
+
+class Perceptron{
+  float[] weights;
+  float lr = 0.001;
+  
+  Perceptron(int n){
+    weights= new float[n];
+    for(int i = 0; i < weights.length; i++){
+      weights[i] = random(-1, 1);
+    }
+  } 
+  
+  int guess(float[] inputs){
+    float sum = 0;
+    for (int i =0; i < weights.length; i++){
+      sum += inputs[i] * weights[i];
+    }
+    int output = sign(sum);
+    return output;
+  }
+  void train(float[] inputs, int target){
+    int guess = guess(inputs);
+    int error= target - guess;
+    
+    for (int i = 0; i < weights.length; i++){
+      weights[i] += error * inputs[i] * lr;
+    }
+  }
+  
+  float guessY(float x){
+    float w0 = weights[0];
+    float w1 = weights[1];
+    float w2 = weights[2];
+    return  -(w2/w1) - (w0/w1) * x;
+  }
+
+}
+
+```
+
+To train the perceptron, we need a set of inputs with a known answer. We could package this up in a class like so:
+
+
+```Java
+class Point{
+  float x;
+  float y;
+  float bais = 1;
+  int label;
+  
+  Point(float x, float y){
+    this.x = x;
+    this.y = y;
+  }
+  
+  Point(){
+    this.x = random(-1, 1);
+    this.y = random(-1, 1);
+    float lineY = f(x);
+    if (x > lineY){
+      this.label = 1;
+    }else{
+      this.label = -1;
+    }
+  }
+  
+  float getpointX(){
+    return map(x,-1, 1, 0, width);
+    
+  }
+  
+  float getpointY(){
+    return map(y,-1, 1, height, 0); 
+  }
+  void show(){
+    stroke(0);
+    if (this.label == 1){
+      fill(255);
+    }else{
+      fill(0);
+    }
+    ellipse(getpointX(), getpointY(), 14, 14);
+  }
+}
+
+
+```
+Now the question becomes, how do we pick a point and know whether it is above or below a line? Let’s start with the formula for a line, where y is calculated as a function of x:
+
+#### y = f(x)
+
+In generic terms, a line can be described as:
+
+#### y = ax + b
+
+Here’s a specific example:
+
+#### y = 0.89 * x - 0.1;
+
+
+We can then write a Processing function with this in mind.
+
+```Java
+// f(x) = m * x + 2
+float f(float x){ 
+    return 0.89 * x - 0.1;
+  }
+  
+```
+
+So, if we make up a point:
+
+```Java
+this.x = random(-1, 1);
+this.y = random(-1, 1);
+```
+How do we know if this point is above or below the line? The line function f(x) gives us the y value on the line for that x position. Let’s call that yline.
+
+
+```Java
+float lineY = f(x);
+```
+
+If the y value we are examining is above the line, it will be less than yline.
+
+<img src="https://natureofcode.com/book/imgs/chapter10/ch10_08.png" title=""/>
+
+```Java
+if (x > lineY){
+      this.label = 1;
+    }else{
+      this.label = -1;
+    }
+```
+
+
+Now, it’s important to remember that this is just a demonstration. Remember our Shakespeare-typing monkeys? We asked our genetic algorithm to solve for “to be or not to be”—an answer we already knew. We did this to make sure our genetic algorithm worked properly. The same reasoning applies to this example. We don’t need a perceptron to tell us whether a point is above or below a line; we can do that with simple math. We are using this scenario, one that we can easily solve without a perceptron, to demonstrate the perceptron’s algorithm as well as easily confirm that it is working properly.
+
+Let’s look at how the perceptron works with an array of many training points.
+
+<img src="https://natureofcode.com/book/imgs/chapter10/ch10_08.png" title=""/>
