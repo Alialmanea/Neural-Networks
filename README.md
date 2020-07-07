@@ -379,4 +379,69 @@ Now, it’s important to remember that this is just a demonstration. Remember ou
 
 Let’s look at how the perceptron works with an array of many training points.
 
-<img src="https://natureofcode.com/book/imgs/chapter10/ch10_08.png" title=""/>
+<img src="ezgif.com-video-to-gif.gif" title=""/>
+
+```sh
+Code Example The Perceptron
+```
+
+```Java
+Perceptron brian;
+Point[] points = new Point[100];
+int trainingindex = 0;
+void setup(){
+  size(600, 600);
+  brian = new Perceptron(3);
+  // initialize The point class
+  for (int i = 0;i < points.length;i++){
+    points[i] = new Point();
+  }
+}
+
+void draw(){
+  background(255);
+  stroke(0);
+  //line(0, width, height , 0);
+  Point p1 = new Point(-1, f(-1));
+  Point p2 = new Point(1, f(1));
+  line(p1.getpointX(), p1.getpointY(), p2.getpointX(), p2.getpointY());
+  
+  // moving line
+  Point p3 = new Point(-1, brian.guessY(-1));
+  Point p4 = new Point(1, brian.guessY(1));
+  
+  line(p3.getpointX(), p3.getpointY(), p4.getpointX(), p4.getpointY());
+  
+  
+  for (Point p : points){ // draw the data as cricle 
+   p.show(); 
+  }
+  
+  for (Point p : points){ //
+    float[] inputs = {p.x, p.y, p.bais};
+    int target = p.label;
+    int guess = brian.guess(inputs);
+    if (guess == target){
+      fill(0, 255, 0);
+    }else{
+      fill(255, 0, 0);
+    }
+    noStroke();
+    ellipse(p.getpointX(), p.getpointY(), 8, 8);
+  }
+  Point tarining = points[trainingindex];
+  float[] inputs = {tarining.x, tarining.y, tarining.bais};
+  int target = tarining.label;
+  brian.train(inputs, target);
+  trainingindex++;
+  if (trainingindex == points.length){
+    trainingindex = 0;
+  }
+}
+  
+```
+
+```sh
+Instead of using the supervised learning model above, can you train the neural network to find the right weights by using a genetic algorithm?
+```
+
