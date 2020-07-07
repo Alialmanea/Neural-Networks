@@ -6,6 +6,7 @@ The human brain can be described as a biological neural network—an interconnec
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_01.png" title=""/>
 
 
+
 The good news is that developing engaging animated systems with code does not require scientific rigor or accuracy, as we’ve learned throughout this book. We can simply be inspired by the idea of brain function.
 
 
@@ -13,6 +14,7 @@ A neural network is a “connectionist” computational system. The computationa
 
 
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_02.png" title=""/>
+
 
 
 Here we have yet another example of a complex system, much like the ones we examined in Chapters 6, 7, and 8. The individual elements of the network, the neurons, are simple. They read an input, process it, and generate an output. A network of many neurons, however, can exhibit incredibly rich and intelligent behaviors.
@@ -26,6 +28,7 @@ Supervised Learning —Essentially, a strategy that involves a teacher that is s
 
 
 <img src="implement_of_Nural_networks.gif" title=""/>
+
 
 
 Unsupervised Learning —Required when there isn’t an example data set with known answers. Imagine searching for a hidden pattern in a data set. An application of this is clustering, i.e. dividing a set of elements into groups according to some unknown pattern. We won’t be looking at any examples of unsupervised learning in this chapter, as this strategy is less relevant for our examples.
@@ -69,6 +72,7 @@ Now that we understand the computational process of a perceptron, we can look at
 
 
 <img src="https://natureofcode.com/book/imgs/chapter10/ch10_04.png" title=""/>
+
 
 
 Consider a line in two-dimensional space. Points in that space can be classified as living on either one side of the line or the other. While this is a somewhat silly example (since there is clearly no need for a neural network; we can determine on which side a point lies with some simple algebra), it shows how a perceptron can be trained to recognize points on one side versus another.
@@ -161,6 +165,7 @@ To train a neural network to answer correctly, we’re going to employ the metho
 
 With this method, the network is provided with inputs for which there is a known answer. This way the network can find out if it has made a correct guess. If it’s incorrect, the network can learn from its mistake and adjust its weights. The process is as follows:
 
+
 > 1. Provide the perceptron with inputs for which there is a known answer.
 
 > 2. Ask the perceptron to guess an answer.
@@ -170,6 +175,7 @@ With this method, the network is provided with inputs for which there is a known
 > 4. Adjust all the weights according to the error.
 
 > 5. Return to Step 1 and repeat!
+
 
 Steps 1 through 4 can be packaged into a function. Before we can write the entire function, however, we need to examine Steps 3 and 4 in more detail. How do we define the perceptron’s error? And how should we adjust the weights according to this error?
 
