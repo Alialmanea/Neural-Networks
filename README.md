@@ -190,5 +190,8 @@ If the perceptron guesses the correct answer, then the guess equals the desired 
 | Attempt | #1 | #2 |
 | :---: | :---: | :---: |
 | Seconds | 301 | 283 |
+| Seconds | 301 | 283 |
+| Seconds | 301 | 283 |
+| Seconds | 301 | 283 |
 
 
